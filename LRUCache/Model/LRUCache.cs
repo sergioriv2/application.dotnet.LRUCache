@@ -56,7 +56,7 @@
 
         public int GetListCount() => _list.Count;
         public int GetDictionaryCount() => _dictionary.Count;
-        public TValue GetFirstValue() => _list.First!.Value;
-        public TValue GetLastValue() => _list.Last!.Value;
+        public TValue GetFirstValue() => _list.First!.Value is null? throw new InvalidOperationException("Empty cache") : _list.First.Value;
+        public TValue GetLastValue() => _list.Last!.Value is null ? throw new InvalidOperationException("Empty cache") : _list.Last.Value;
     }
 }
