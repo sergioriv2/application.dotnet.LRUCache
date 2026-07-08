@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+
+  <!-- Configuración Global del Entorno de Pruebas -->
+  <RunConfiguration>
+    <!-- Fuerza la arquitectura del proceso de pruebas (opcional) -->
+    <TargetPlatform>X64</TargetPlatform>
+    <TargetFrameworkVersion>.NETCoreApp,Version=v10.0</TargetFrameworkVersion>
+  </RunConfiguration>
+
+  <!-- Configuración específica de NUnit Test Adapter -->
+  <NUnit>
+    <NumberOfTestWorkers>-1</NumberOfTestWorkers>
+    <ShadowCopyFiles>false</ShadowCopyFiles>
+  </NUnit>
+
+  <!-- Recopilación de datos de Cobertura -->
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <!-- Colector Estándar de Microsoft (Recomendado por FCC para .NET moderno) -->
+      <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" enabled="True">
+        <Configuration>
+          <CodeCoverage>
+            <!-- Módulos (DLLs) a incluir o excluir de la métrica -->
+            <ModulePaths>
+              <Include>
+                <!-- Incluye las DLLs de tu lógica de negocio/aplicación real -->
+                <ModulePath>.*\.dll$</ModulePath>
+              </Include>
+              <Exclude>
+                <!-- EXCLUYE imperativamente tus propios proyectos de prueba de la cobertura -->
+                <ModulePath>.*tests?\.dll$</ModulePath>
+                <ModulePath>.*nunit.*</ModulePath>
+                <ModulePath>.*fine.*</ModulePath>
+              </Exclude>
+            </ModulePaths>
+
+            <!-- Exclusión basada en atributos en el código fuente -->
+            <Attributes>
+              <Exclude>
+                <Attribute>^System\.Diagnostics\.CodeAnalysis\.ExcludeFromCodeCoverageAttribute$</Attribute>
+               </Exclude>
+			</Attributes>
+
+            <!-- Ajuste crítico para .NET 10 y componentes nativos si aplica -->
+            <EnableDynamicNativeInstrumentation>false</EnableDynamicNativeInstrumentation>
+          </CodeCoverage>
+        </Configuration>
+      </DataCollector>
+      
+      <!-- Alternativa multiplataforma si usas Coverlet en lugar de MS Code Coverage -->
+      <DataCollector friendlyName="XPlat code coverage" enabled="True">
+        <Configuration>
+          <Format>cobertura,opencover</Format>
+          <Exclude>[*Tests*]*,[nunit*]*</Exclude>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+
+</RunSettings>

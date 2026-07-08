@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path=".runsettings" />
+  </Folder>
+  <Project Path="LRUCache.Tests/LRUCache.Tests.csproj" />
+  <Project Path="LRUCache/LRUCache.csproj" />
+</Solution>
